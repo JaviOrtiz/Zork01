@@ -3,6 +3,7 @@
 #include "Exits.h"
 #include "Room.h"
 #include <string.h>
+#include <stdlib.h>
 #define Num_Rooms 10
 #define Num_Exits 17
 
@@ -10,7 +11,7 @@ World::World()
 {
 	rooms = new Room[Num_Rooms];
 	exits = new Exit[Num_Exits];
-
+	players = new Player[0];
 
 }
 
@@ -153,9 +154,139 @@ void World::createExits() const{
 	exits[16].origin = &rooms[8];
 	exits[16].destination = &rooms[9];
 	exits[16].direction = west;
-	}
+	};
+
+void World::comand(){
+	
+	players[0].position = &rooms[0];
+
+	char command[15];
+	char *help;
+	char *first;
+	char *second;
+
+	do{
+		int i = 0, j;
+		do{
+			
+			printf("you are in %s\n", players[0].position);
+			printf("What do you want to do?\n");
+			gets_s(command);
+			first = strtok_s(command, " ", &help);
+		} while (first == NULL);
+		second = strtok_s(NULL, " ", &help);
+
+
+		if (strcmp(command, "help") == 0)
+		{
+			printf("Hi, and Wellcome to my zork\ncomands:\n'help' for show this help again\n'go' for walk in a direction\n'look' for receive the description of the room\n'open' for open a door or a window\n'close' for close a door or a window\n'quit' for quite the game\n enjoy playing :D\n");
+			
+		}
+
+		else if (strcmp(command, "go") == 0)
+		{
+			if (strcmp(second, "north") == 0 || (strcmp(second, "n") == 0)){
+				for (i = 0; i < Num_Exits; i++)
+				{
+					if ((exits[i].direction == north) && (exits[i].origin == (players[0].position)))
+					{
+
+						printf("%s\n", exits[i].description);
+						(players[0].position) = (exits[i].destination);
+						break;
+
+
+					}
+				}
+			}
+			else if (strcmp(second, "south") == 0 || (strcmp(second, "s") == 0)){
+				for (i = 0; i < Num_Exits; i++)
+				{
+					if ((exits[i].direction == south) && (exits[i].origin == (players[0].position)))
+					{
+
+						printf("%s\n", exits[i].description);
+						(players[0].position) = (exits[i].destination);
+						break;
+
+
+					}
+				}
+
+			}
+		
+		else if (strcmp(second, "west") == 0 || (strcmp(second, "w") == 0)){
+			for (i = 0; i < Num_Exits; i++)
+			{
+				if ((exits[i].direction == west) && (exits[i].origin == (players[0].position)))
+				{
+
+					printf("%s\n", exits[i].description);
+					(players[0].position) = (exits[i].destination);
+					break;
+
+
+				}
+			}
+		}
+		if (strcmp(second, "east") == 0 || (strcmp(second, "e") == 0)){
+			for (i = 0; i < Num_Exits; i++)
+			{
+				if ((exits[i].direction == east) && (exits[i].origin == (players[0].position)))
+				{
+
+					printf("%s\n", exits[i].description);
+					(players[0].position) = (exits[i].destination);
+					break;
+
+
+				}
+			}
+		}
+
+
+
+
+			//else if (*command == 'n' || *command == 's' || *command == 'w' || *command == 'e')
+				//movement(*command);
+		}
+
+
+
+
+
+	} while (strcmp(command, "quit") != 0);
+};
+
+
+	void World::movement(char direction){
+		int i;
+		switch (direction)
+		{
+		case 'n':
+			for (i = 0; i < Num_Exits; i++)
+			{
+				if ((exits[i].direction == north) && (exits[i].origin == (&rooms[0])))
+				{
+					(rooms[i]) = (*(exits[i].destination));
+					printf("%s", exits[i].description);
+					
+				}
+			}
+			break;
+
+		}
+	};
+
+
 
 World::~World(){
+
 	delete[] rooms;
 	delete[] exits;
 }
+
+
+/*strtok_s(command, " ", &first);
+strtok_s(first, "\n", &second);
+strtok_s(command, "\n", &second);*/
