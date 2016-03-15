@@ -1,8 +1,6 @@
 #ifndef _Room
 #define _Room
 
-
-
 class Room {
 public:
 
@@ -11,3 +9,4 @@ public:
 
 };
 #endif _Room
+

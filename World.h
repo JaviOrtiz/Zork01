@@ -1,13 +1,14 @@
 #ifndef _World
 #define _World
-#endif _World
 #include "Room.h"
+#include "Exits.h"
+
 class World
 {
 public:
-	Room *rooms = nullptr;
-	Exit *exits = nullptr;
-	
+	Room* rooms;
+	Exit* exits;
+		
 
 public:
 	World();
@@ -18,3 +19,6 @@ public:
 
 
 };
+
+
+#endif _World

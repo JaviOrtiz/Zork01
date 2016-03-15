@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Exits.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
