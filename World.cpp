@@ -157,58 +157,61 @@ void World::createExits() const{
 	exits[16].origin = &rooms[8];
 	exits[16].destination = &rooms[9];
 	exits[16].direction = west;
-	};
+};
 
 void World::comand(){  //Create the Commands  Help, Go, Look, Close, Open and Quit
-	
+
 	players[0].position = &rooms[0];
 	char command[15];
 	char *help;
 	char *first;
 	char *second;
-
+	printf("you are in %s\n", players[0].position);
 	do{
 		int i = 0, j;
+
 		do{
-			
-			printf("you are in %s\n", players[0].position);
-			printf("What do you want to do?\n");
+
+
+			printf("\n>What do you want to do?\n\n>>");
 			gets_s(command);
 			first = strtok_s(command, " ", &help);
 		} while (first == NULL);
 		second = strtok_s(NULL, " ", &help);
 
 
-		if (strcmp(command, "help") == 0)
+		if (strcmp(command, "help") == 0 || strcmp(command, "HELP") == 0 || strcmp(command, "Help") == 0)
 		{
 			printf("Hi, and Wellcome to my zork\n\nComands:\n\n'help' for show this help again\n'go' for walk in a direction\n'look' for receive the description of the room\n'open' for open a door or a window\n'close' for close a door or a window\n'quit' for quite the game\n ENJOY PLAYING :D\n\n");
-			
+
 		}
 		//-------------------------------------------------------------------------------------------//
-		else if (strcmp(command, "go") == 0 )
+		if (strcmp(command, "go") == 0 || strcmp(command, "Go") == 0 || strcmp(command, "GO") == 0)
 		{
-			if (strcmp(second, "north") == 0 || (strcmp(second, "n") == 0)){
+			if (strcmp(second, "north") == 0 || strcmp(second, "n") == 0 || strcmp(second, "N") == 0 || strcmp(second, "NORTH") == 0 || strcmp(second, "North") == 0){
 				for (i = 0; i < Num_Exits; i++)
 				{
 					if ((exits[i].direction == north) && (exits[i].origin == (players[0].position)))
 					{
 
-						printf("%s\n", exits[i].description);
+						printf("\n%s\n", exits[i].name);
 						(players[0].position) = (exits[i].destination);
+						strcpy_s(players[0].description, exits[i].description);
 						break;
 
 
 					}
 				}
 			}
-			else if (strcmp(second, "south") == 0 || (strcmp(second, "s") == 0)){
+			else if (strcmp(second, "south") == 0 || strcmp(second, "s") == 0 || strcmp(second, "S") == 0 || strcmp(second, "SOUTH") == 0 || strcmp(second, "South") == 0){
 				for (i = 0; i < Num_Exits; i++)
 				{
 					if ((exits[i].direction == south) && (exits[i].origin == (players[0].position)))
 					{
 
-						printf("%s\n", exits[i].description);
+						printf("\n%s\n", exits[i].name);
 						(players[0].position) = (exits[i].destination);
+						strcpy_s(players[0].description, exits[i].description);
 						break;
 
 
@@ -217,41 +220,42 @@ void World::comand(){  //Create the Commands  Help, Go, Look, Close, Open and Qu
 
 			}
 
-			else if (strcmp(second, "west") == 0 || (strcmp(second, "w") == 0)){
+			else if (strcmp(second, "west") == 0 || strcmp(second, "w") == 0 || strcmp(second, "W") == 0 || strcmp(second, "WEST") == 0 || strcmp(second, "West") == 0){
 				for (i = 0; i < Num_Exits; i++)
 				{
 					if ((exits[i].direction == west) && (exits[i].origin == (players[0].position)))
 					{
 
-						printf("%s\n", exits[i].description);
+						printf("\n%s\n", exits[i].name);
 						(players[0].position) = (exits[i].destination);
+						strcpy_s(players[0].description, exits[i].description);
 						break;
 
 
 					}
 				}
 			}
-			if (strcmp(second, "east") == 0 || (strcmp(second, "e") == 0)){
+			else if (strcmp(second, "east") == 0 || strcmp(second, "e") == 0 || strcmp(second, "E") == 0 || strcmp(second, "EAST") == 0 || strcmp(second, "East") == 0){
 				for (i = 0; i < Num_Exits; i++)
 				{
 					if ((exits[i].direction == east) && (exits[i].origin == (players[0].position)))
 					{
 
-						printf("%s\n", exits[i].description);
+						printf("\n%s\n", exits[i].name);
 						(players[0].position) = (exits[i].destination);
+						strcpy_s(players[0].description, exits[i].description);
 						break;
 
 
 					}
 				}
 			}
-		
-		
 		}
-		//------------------------------------------------------------------------------------//
-		else if (strcmp(command, "look")){
 
-		
+		//------------------------------------------------------------------------------------//
+		else if (strcmp(command, "look") == 0 || strcmp(command, "LOOK") == 0 || strcmp(command, "Look") == 0) {
+
+			printf("\n%s\n", players[0].description);
 
 		};
 
@@ -260,38 +264,16 @@ void World::comand(){  //Create the Commands  Help, Go, Look, Close, Open and Qu
 
 
 
-	} while (strcmp(command, "quit") != 0);
+
+
+	}
+
+	while (strcmp(command, "quit") != 0);
 };
-
-
-	void World::movement(char direction){
-		int i;
-		switch (direction)
-		{
-		case 'n':
-			for (i = 0; i < Num_Exits; i++)
-			{
-				if ((exits[i].direction == north) && (exits[i].origin == (&rooms[0])))
-				{
-					(rooms[i]) = (*(exits[i].destination));
-					printf("%s", exits[i].description);
-					
-				}
-			}
-			break;
-
-		}
-	};
-
-
 
 World::~World(){
 
 	delete[] rooms;
 	delete[] exits;
+	delete players;
 }
-
-
-/*strtok_s(command, " ", &first);
-strtok_s(first, "\n", &second);
-strtok_s(command, "\n", &second);*/

@@ -6,7 +6,7 @@
 class Player{
 public:
 	Room* position;
-	Room* description;
+	char description[300];
 };
 
 #endif _Player
