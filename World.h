@@ -16,12 +16,11 @@ public:
 	World();
 	~World();
 
+public:
+
 	void createWorld() const;
 	void createExits() const;
-	void comand();
-	void movement(char);
-
-
+	void comand()const;
 };
 
 

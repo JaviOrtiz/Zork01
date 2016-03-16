@@ -6,7 +6,10 @@
 class Player{
 public:
 	Room* position;
-	char description[300];
+	char description[200];
+public:
+	Player::Player();
+	Player::~Player();
 };
 
 #endif _Player

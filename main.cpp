@@ -1,6 +1,7 @@
 #include "Room.h"
 #include "World.h"
 #include "Exits.h"
+#include "Player.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,4 +10,5 @@ int main(){
 	map.createWorld();
 	map.createExits();
 	map.comand();
+	return 0;
 }

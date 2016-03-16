@@ -4,8 +4,11 @@
 class Room {
 public:
 
-	char name[20];
-	char description[300];
+	char name[30];
+	char description[200];
+public:
+	Room::Room();
+	Room::~Room();
 
 };
 #endif _Room
