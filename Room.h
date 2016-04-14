@@ -1,11 +1,11 @@
 #ifndef _Room
 #define _Room
+#include "Entity.h"
 
-class Room {
+class Room:public Entity {
 public:
 
-	char name[30];
-	char description[200];
+	Room(const char*, const char*);
 public:
 	Room::Room();
 	Room::~Room();

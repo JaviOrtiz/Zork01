@@ -9,7 +9,7 @@
 template <class TYPE>
 class Vector{
 private:
-	TYPE *buffer;
+	TYPE *buffer=nullptr;
 	uint capacity = 10;
 	uint num_elements = 0;
 
@@ -20,10 +20,11 @@ public:
 
 	};
 
-	Vector(const Vector& My_Vector){
+	Vector(const Vector& My_Vector){ //copy constructor
+	
 	capacity:My_Vector.capacity;
 	num_elements:My_Vector.num_elements;
-		buffer = new TYPE[My_Vector.capacity];
+	buffer = new TYPE[My_Vector.capacity];
 
 		for (uint i = 0; i < num_elements; i++){
 			buffer[i] = My_Vector.buffer[i];
@@ -35,6 +36,12 @@ public:
 
 		delete[] buffer;
 	};
+
+	const TYPE &operator[](const uint &index) const
+	{
+		assert(index >= 0 && index < n_elements);
+		return vector[index];
+	}
 
 
 	uint Get_Capacity()const{

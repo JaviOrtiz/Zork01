@@ -1,15 +1,19 @@
 #ifndef _World
 #define _World
+
 #include "Room.h"
 #include "Exits.h"
 #include "Player.h"
+#include "Entity.h"
+#include "My_String.h"
+#include "Vector.h"
 
 class World
 {
 public:
-	Room* rooms;
-	Exit* exits;
-	Player* players;
+	Vector <Room*> rooms;
+	Vector <Exit*> exits;
+	Vector <Player*> players;
 		
 
 public:
@@ -18,8 +22,8 @@ public:
 
 public:
 
-	void createWorld() const;
-	void createExits() const;
+	void createWorld() ;
+	void createExits() ;
 	void comand()const;
 };
 

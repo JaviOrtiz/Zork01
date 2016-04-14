@@ -1,6 +1,7 @@
 #ifndef _Entity_
 #define _Entity_
 
+#include "My_String.h"
 enum EntityType{
 
 	ROOM,
@@ -16,8 +17,9 @@ enum EntityType{
 class Entity{
 public:
 
-	Entity* Type
-	string name;
+	Entity* Type;
+	String name;
+	String  description;
 
 public:
 	Entity(const char* name, const char* description);

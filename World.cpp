@@ -9,19 +9,34 @@
 
 World::World()
 {
-	rooms = new Room[Num_Rooms];
-	exits = new Exit[Num_Exits];
-	players = new Player;
+	
 
 }
 
-void World::createWorld() const {
-	const char *names[] = { "Your Cell", "First Corridor", "Kitchen", "Prison Snake' Room", "Coutyard", "Second Corridor", "Booker Cell", "Execcution Room", "Bathroom", "Cliff" };
+void World::createWorld() {
+
+	/*Create the world now in vectors, they got name and description */
+
+
+	rooms.push_back(new Room("Your Cell", "You are in Your Cell, there is a bed and a toilet, the First Corridor is in the north "));
+	rooms.push_back(new Room("First Corridor", "You are in the First Corridor, Your cell is in the south, the Kitchen is in the north"));
+	rooms.push_back(new Room("Kitchen", "You are in the Kitchen, the Second Corridor is in the north, the First Corridor is in the south, the Prison Snake's Room is in the west, the Courtyard is in the east"));
+	rooms.push_back(new Room("Prisen Snake's Room", "You are in the Prison Snake's Room, the Kitchen is in the east"));
+	rooms.push_back(new Room("Coutyard", "You are in the Coutyard, the Kitchen is in the west"));
+	rooms.push_back(new Room("Second Corridor","You are in the second Corridor, the Bathroom is in the north, the Kitchen is in the south"));
+	rooms.push_back(new Room("Booker Cell", "You are in the Booker Cell, the Second Corridor is in the west"));
+	rooms.push_back(new Room("Execcution Room", "You are in the Execution room, the Second Corridor is in the east"));
+	rooms.push_back(new Room("Bathroom", "You are in the Bathroom, the Second Corridor is in the south, there is a open window who takes you to a cliff"));
+	rooms.push_back(new Room("Cluff", "You are in the cliff, seems you can jump and go away from this Prison"));
+
+	
+
+	/*const char *names[] = { "Your Cell", "First Corridor", "Kitchen", "Prison Snake' Room", "Coutyard", "Second Corridor", "Booker Cell", "Execcution Room", "Bathroom", "Cliff" };
 	for (int i = 0; i < Num_Rooms; i++) {
-		strcpy_s(rooms[i].name, names[i]);
+		strcpy_s(rooms[i].name, names[i]);*/
 	}
 
-	const char *descriptions[] = {
+	/*const char *descriptions[] = {
 		"You are in Your Cell, there is a bed and a toilet, the First Corridor is in the north",
 		"You are in the First Corridor, Your cell is in the south, the Kitchen is in the north",
 		"You are in the Kitchen,the Second Corridor is in the north, the First Corridor is in the south, the Prison Snake's Room is in the west, the Courtyard is in the east",
@@ -36,10 +51,30 @@ void World::createWorld() const {
 	for (int i = 0; i < Num_Rooms; i++) {
 		strcpy_s(rooms[i].description, descriptions[i]);
 	}
-}
+}*/
 
-void World::createExits() const{
-	//0.Create the  Exit from the cell to the First Corridor//
+void World::createExits() {
+	
+	exits.push_back(new Exit("First Corridor", "You go to the First Corridor", rooms[0], rooms[1], north));
+	exits.push_back(new Exit("Your Cell", "You go to Your Cell", rooms[1], rooms[0], south));
+	exits.push_back(new Exit("The Kitchen", "You go to the Kitchen", rooms[1], rooms[2], north));
+	exits.push_back(new Exit("First Corridor", "You go to the First Corridor", rooms[2], rooms[1], south));
+	exits.push_back(new Exit("Prison Snake's Room", "You go to the Prison Snake's Room ", rooms[2], rooms[3], west));
+	exits.push_back(new Exit("Kitchen", "You go to the Kitchen", rooms[3], rooms[2], east));
+	exits.push_back(new Exit("Coutyard", "You go to the Coutyard", rooms[2], rooms[4], east));
+	exits.push_back(new Exit("Kitchen", "You go to the Kitchen", rooms[4], rooms[2], west));
+	exits.push_back(new Exit("Second Corridor", "You go to the Second Corridor", rooms[2], rooms[5], north));
+	exits.push_back(new Exit("Kitchen", "You go to the Kitchen", rooms[5], rooms[2], south));
+	exits.push_back(new Exit("Booker's Cell", "You go to the Booker's Cell", rooms[5], rooms[6], east));
+	exits.push_back(new Exit("Second Corridor", "You go to the Second Corridor", rooms[6], rooms[5], west));
+	exits.push_back(new Exit("Execcution Room", "You go to the Execcution Room", rooms[5], rooms[7], west));
+	exits.push_back(new Exit("Second Corridor", "You go to the Second Corridor", rooms[7], rooms[5], east));
+	exits.push_back(new Exit("Bathroom", "You go to the Bathroom", rooms[5], rooms[8], north));
+	exits.push_back(new Exit("Second Corridor", "You go to the Second Corridor", rooms[8], rooms[5], south));
+	exits.push_back(new Exit("Cliff", "You go to the Cliff", rooms[8], rooms[9], east));
+
+
+	/*//0.Create the  Exit from the cell to the First Corridor//
 	strcpy_s(exits[0].name, "First Corridor");
 	strcpy_s(exits[0].description, rooms[1].description);
 	exits[0].origin = &rooms[0];
@@ -158,7 +193,7 @@ void World::createExits() const{
 	strcpy_s(exits[16].description, rooms[9].description);
 	exits[16].origin = &rooms[8];
 	exits[16].destination = &rooms[9];
-	exits[16].direction = west;
+	exits[16].direction = west;*/
 };
 
 void World::comand()const{  //Create the Commands  Help, Go, Look, Close, Open and Quit

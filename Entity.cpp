@@ -2,9 +2,7 @@
 
 
 
-Entity::Entity(const char* name, const char* description){
-
-
+Entity::Entity(const char* name, const char* description) :name(name), description(description){
 
 
 };
