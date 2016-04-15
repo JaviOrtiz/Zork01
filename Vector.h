@@ -37,11 +37,16 @@ public:
 		delete[] buffer;
 	};
 
-	const TYPE &operator[](const uint &index) const
+	 TYPE operator[](uint index) const
 	{
-		assert(index >= 0 && index < n_elements);
+		assert( index < num_elements); //if index > num_elements = runtime error
 		return vector[index];
-	}
+	 };
+	 TYPE &operator[](const uint &index) 
+	{
+		assert(index < num_elements); //if index > num_elements = runtime error
+		return vector[index];
+	 };
 
 
 	uint Get_Capacity()const{
@@ -107,8 +112,16 @@ public:
 		}num_elements++;
 	};
 
+	bool pop_back(TYPE & value){
 
+		if (num_elements > 0){
+			num_elements--;
+			value = buffer[num_elements];
+			return true;
+		}
+		else return false;
 
+	}
 
 
 	bool empty() const{
@@ -122,6 +135,17 @@ public:
 		buffer[0] = NULL;
 		num_elements = 0;
 	}
+
+
+	}
+
+
+
+
+
+
+
+
 
 
 
@@ -189,3 +213,8 @@ rooms.Push_back(new Room("nombre","descripcion")
 
 
 																*/
+
+
+/*que valores recibe
+ es constante?
+ que retorna*/
